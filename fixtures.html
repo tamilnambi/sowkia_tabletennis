@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Matches</title>
+</head>
+
+<body>Fixtures</body>
+<script>
+
+    function getMatchTable(match, playerMap) {
+        return `
+        <h5>Match ${match.id}</h5>
+        <table>
+            <tr><th>Name</th><th>Set 1</th><th>Set 2</th><th>Set 3</th><th>Winner</th></tr>
+            <tr><td>${playerMap.get(match.player_a).name}</td><td>${match.player_a_set_1_score}</td><td>${match.player_a_set_2_score}</td><td>${match.player_a_set_3_score}</td><td rowspan="2">${match.winner? match.winner: "TBD"}</td></tr>
+            <tr><td>${playerMap.get(match.player_b).name}</td><td>${match.player_b_set_1_score}</td><td>${match.player_b_set_2_score}</td><td>${match.player_b_set_3_score}</td></tr>
+            
+
+        </table>
+        `;
+        //return playerMap.get(match.player_a).name + " vs " + playerMap.get(match.player_b).name;
+    }
+
+    fetch("https://x8ki-letl-twmt.n7.xano.io/api:xijaRd_j/player")
+        .then(res => res.json())
+        .then(players => {
+            const playerMap = new Map(players.map((player) => [player.id, player]));
+            fetch("https://x8ki-letl-twmt.n7.xano.io/api:xijaRd_j/match")
+                .then(res => res.json())
+                .then(matches => {
+                    debugger;
+                    const fixtures = matches.map(match => getMatchTable(match, playerMap));
+                    document.body.innerHTML += fixtures.join("<br />");
+                });
+        });
+</script>
+
+</html>
