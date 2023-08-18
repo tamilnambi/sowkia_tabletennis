@@ -1,0 +1,12 @@
+:root {
+    --primary : #F26638;
+    --secondary : #5DC9D1;
+}
+
+.btn-custom{
+    background-color: var(--primary);
+}
+
+.btn-custom:hover{
+    background-color: var(--secondary);
+}
