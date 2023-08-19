@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Players</title>
+    </head>
+    <body>Players</body>
+    <script>
+        fetch("https://x8ki-letl-twmt.n7.xano.io/api:xijaRd_j/player").then(res => res.json()).then(data => document.body.innerHTML += "<pre>" + JSON.stringify(data, null, "  ") + "</pre>")
+    </script>
+</html>

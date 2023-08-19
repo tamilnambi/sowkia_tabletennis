@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leaderboard</title>
+</head>
+
+<body>Leaderboard</body>
+<script>
+    function getLeaderboardTable(matches, playerMap) {
+        const leaderboardTable = `
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Draw</th>
+                <th>Points</th>
+            </tr>
+            ${[...playerMap.values()].map(player => {
+            return `
+                    <tr>
+                        <td>${player.name}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                `
+        }).join("")}
+        </table>
+        `;
+        return leaderboardTable;
+    }
+
+    fetch("https://x8ki-letl-twmt.n7.xano.io/api:xijaRd_j/player")
+        .then(res => res.json())
+        .then(players => {
+            const playerMap = new Map(players.map((player) => [player.id, player]));
+            fetch("https://x8ki-letl-twmt.n7.xano.io/api:xijaRd_j/match")
+                .then(res => res.json())
+                .then(matches => {
+                    debugger;
+                    const leaderboardTable = getLeaderboardTable(matches, playerMap);
+                    document.body.innerHTML += leaderboardTable;
+                });
+        });
+</script>
+
+</html>
